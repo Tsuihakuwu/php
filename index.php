@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exercices Boucles PHP</title>
+    <title>Exercices PHP</title>
 </head>
 <body>
 
@@ -28,6 +28,8 @@ for ($a = 0; $a <= 150; $a++) {
     Écrire un programme qui écrit 500 fois la phrase Je dois faire des sauvegardes régulières de mes fichiers
 -->
 
+<hr>
+
 <h2>Sauvegarde</h2>
 
 <?php
@@ -42,22 +44,24 @@ for ($a = 0; $a <= 500; $a++) {
 
 Tableau HTML -->
 
+<hr>
+
 <h2>Table de multiplication</h2>
 
 <?php
 
-echo '<table style=\'border:solid black 1px\'><thead><tr><th style=\'border:solid black 1px\'></th>';
+echo '<table border=1><thead><tr><th border=1></th>';
 
     for($th=0;$th<=12;$th++){
-        echo '<th style=\'border:solid black 1px\'><b>'.$th.'</b></th>';
+        echo '<th border=1><b>'.$th.'</b></th>';
     }
 
 echo '</tr></thead><tbody>';
 
     for($tr=0;$tr<=12;$tr++){
-        echo '<tr><td style=\'border:solid black 1px\'><b>'.$tr.'</b></td>';
+        echo '<tr><td border=1><b>'.$tr.'</b></td>';
             for($td=0;$td<=12;$td++){
-                echo '<td style=\'border:solid black 1px\'>'.$td*$tr.'</td>';
+                echo '<td border=1>'.$td*$tr.'</td>';
             }
         echo '</tr>';
     }
@@ -66,6 +70,7 @@ echo '</table>';
 
 ?>
 
+<hr>
 
 <h1>Tableau PHP</h1>
 
@@ -101,7 +106,7 @@ $taba = array(
 
 asort($taba);
 
-echo '<table style=\'border:solid black 1px\'><tbhead><tr><td><b>Mois</b></td>'.'<td><b>Nbr de jours</b></td></tr></thead><tbody>';
+echo '<table border=1><tbhead><tr><td><b>Mois</b></td>'.'<td><b>Nbr de jours</b></td></tr></thead><tbody>';
 
 foreach ($taba as $month => $days)
 {
@@ -111,6 +116,8 @@ foreach ($taba as $month => $days)
 echo '</tbody></table>';
 
 ?>
+
+<hr>
 
 <h2>Capitales</h2>
 
@@ -190,11 +197,14 @@ $capitales = array(
     "Zagreb" => "Croatie"
 );
 
-echo '<h3>Capitales par ordre alphabétique</h3>';
+?>
+<h3>Capitales par ordre alphabétique</h3>
+
+<?php
 
 ksort($capitales);
 
-echo '<table style=\'border:solid black 1px\'><tbhead><tr><td><b>Capitale</b></td>'.'<td><b>Pays</b></td></tr></thead><tbody>';
+echo '<table border=1><tbhead><tr><td><b>Capitale</b></td>'.'<td><b>Pays</b></td></tr></thead><tbody>';
 
 foreach ($capitales as $cap => $pays)
 {
@@ -203,12 +213,15 @@ foreach ($capitales as $cap => $pays)
 
 echo '</tbody></table>';
 
+?>
 
-echo '<h3>Pays par ordre alphabétique</h3>';
+<h3>Pays par ordre alphabétique</h3>
+
+<?php
 
 asort($capitales);
 
-echo '<table style=\'border:solid black 1px\'><tbhead><tr><td><b>Pays</b></td>'.'<td><b>Capitale</b></td></tr></thead><tbody>';
+echo '<table border=1><tbhead><tr><td><b>Pays</b></td>'.'<td><b>Capitale</b></td></tr></thead><tbody>';
 
 foreach ($capitales as $cap => $pays)
 {
@@ -221,9 +234,13 @@ $nb = count($capitales);
 
 echo "<h3>Le tableau contient ".$nb." éléments.</h3>";
 
-echo '<h3>Suppression des capitales commencant par B</h3>';
+?>
 
-echo '<table style=\'border:solid black 1px\'><tbhead><tr><td><b>Capitale</b></td>'.'<td><b>Pays</b></td></tr></thead><tbody>';
+<h3>Suppression des capitales commencant par B</h3>
+
+<?php
+
+echo '<table border=1><tbhead><tr><td><b>Capitale</b></td>'.'<td><b>Pays</b></td></tr></thead><tbody>';
 
 ksort($capitales);
 $i=0;
@@ -239,8 +256,247 @@ foreach ($capitales as $cap => $pays)
     }
 }
 
+echo '</table>';
+
 ?>
 
+<hr>
+<h2>Départements</h2>
+
+<?php
+    $departements = array(
+    "Hauts-de-france" => array("Aisne", "Nord", "Oise", "Pas-de-Calais", "Somme"),
+    "Bretagne" => array("Côtes d'Armor", "Finistère", "Ille-et-Vilaine", "Morbihan"),
+    "Grand-Est" => array("Ardennes", "Aube", "Marne", "Haute-Marne", "Meurthe-et-Moselle", "Meuse", "Moselle", "Bas-Rhin", "Haut-Rhin", "Vosges"),
+    "Normandie" => array("Calvados", "Eure", "Manche", "Orne", "Seine-Maritime")
+);
+?>
+
+<!-- A partir du tableau ci-dessus:
+
+    Affichez la liste des régions (par ordre alphabétique) suivie du nom des départements
+
+-->
+
+<h3>Région par ordre alphabétique</h3>
+
+<?php 
+    ksort($departements);
+
+    echo '<table border=1><tbhead><tr><td><b>Région</b></td>'.'<td><b>Départements</b></td></tr></thead><tbody>';
+
+    foreach($departements as $region => $ldep){
+        for($i=0;$i<count($ldep);$i++){
+            echo '<tr><td>'.$region.'</td>';
+            echo '<td>'.$ldep[$i].'</td></tr>';
+        }
+    }
+
+    echo '</table>';
+
+?>
+
+<!--
+    Affichez la liste des régions suivie du nombre de départements -->
+
+<h3>Région et nombre de départements</h3>
+
+<?php 
+    ksort($departements);
+    
+    echo '<table border=1><tbhead><tr><td><b>Région</b></td>'.'<td><b>Nombre de départements</b></td></tr></thead><tbody>';
+
+    foreach($departements as $region => $ldep){
+            echo '<tr><td>'.$region.'</td>';
+            echo '<td>'.count($ldep).'</td></tr>';
+    }
+
+    echo '</table>';
+
+?>
+
+<hr>
+<h1>Fonctions PHP</h1>
+
+<h2>Fonction URL</h2>
+
+<!-- Ecrivez une fonction qui permette de générer un lien. -->
+
+<?php
+
+
+function lien($url,$txt)
+{
+    echo '<a href="'.$url.'">'.$txt.'</a>';
+}
+
+lien("https://www.reddit.com/", "Reddit Hug");
+
+?>
+
+<hr>
+<h2>Fonction Somme des valeurs d'un tableau</h2>
+
+<!-- Ecrivez une fonction qui calcul la somme des valeurs d'un tableau-->
+
+<?php
+
+function somme($MyTab){
+    static $somme=0;
+    for($i=0;$i<count($MyTab);$i++){
+        $somme += $MyTab[$i];
+    }
+    echo $somme;
+}
+
+$tab = array(4, 3, 8, 2);
+$resultat = somme($tab);
+
+echo $resultat;
+
+?>
+
+<hr>
+<h2>Complexité Mot de passe</h2>
+
+<!-- Créer une fonction qui vérifie le niveau de complexité d'un mot de passe
+
+Elle doit prendra un paramètre de type chaîne de caractères. Elle retournera une valeur booléenne qui vaut true si le paramètre (le mot de passe) respecte les règles suivantes :
+
+    Faire au moins 8 caractères de long
+    Avoir au moins 1 chiffre
+    Avoir au moins une majuscule et une minuscule
+
+$resultat = complex_password("TopSecret42");
+
+$resultat doit contenir true.
+
+    Aidez-vous des expressions régulières ! -->
+
+<?php
+
+function complex_password($MyPassword){
+    $pattern = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/";
+    return preg_match($pattern, $MyPassword);
+}
+
+$resultat = complex_password("TopSecret42");
+$retour = ($resultat==True)?"True":"False";
+echo $retour;
+    
+?>
+
+<h1>Les dates et les heures</h1>
+
+<?php 
+        date_default_timezone_set("Europe/Paris"); 
+        echo "Nous sommes le " . date("d/m/Y");
+
+?>
+
+
+<!-- Exercices
+
+    Utilisez l'objet DateTime, sauf mention contraire.
+
+    Trouvez le numéro de semaine de la date suivante : 14/07/2019. -->
+
+    <h2>Numéro de la semaine</h2>
+
+<?php
+    $datestr = '14/07/2019';
+    $ts = strtotime(str_replace("/", "-", $datestr));
+    echo 'La date du 14/07/2019 correspond au timestamp '.$ts.' et à la '.idate('W',$ts).'em semaine de l\'année 2019';
+?>
+
+<hr>
+
+    <!--Combien reste-t-il de jours avant la fin de votre formation ? -->
+
+    <h2>Date de fin de formation</h2>
+
+<?php
+
+    $Now = new DateTime('now', new DateTimeZone('Europe/Paris'));
+    $dtfin= new DateTime('2023-3-31');
+
+    $diff=$Now->diff($dtfin);
+
+    echo 'Jours restant avant fin du module : '.$diff->format('%a jours');
+
+?>
+
+    <!-- Comment déterminer si une année est bissextile ? -->
+    <hr>
+    <h2>Année bissextile</h2>
+
+<?php
+
+    $MyDate = 1900;
+
+    if (date("L", mktime(0, 0, 0, 1, 1,$MyDate)) == 1) {
+        echo 'L\'année '.$MyDate.' est bissextile';
+    }
+    else {
+        echo 'L\'année '.$MyDate.' n\'est pas bissextile';
+    }
+?>
+
+<!-- Montrez que la date du 32/17/2019 est erronée. -->
+<hr>
+    <h2>Date erronée</h2>
+
+<?php
+
+    function validateDate($date, $format = 'Y-m-d'){
+    $d = DateTime::createFromFormat($format, $date);
+    return $d && $d->format($format) === $date;
+    }
+
+    if(validateDate('2019-17-32')){
+        echo 'Date valide';
+    }else {
+        echo 'Date invalide';
+    }
+
+?>
+
+    <!-- Affichez l'heure courante sous cette forme : 11h25. -->
+    <hr>
+    <h2>Heure courante sous forme hhmm</h2>
+
+<?php
+    $Now = new DateTime('now', new DateTimeZone('Europe/Paris'));
+
+    echo $Now->format("H")."h".$Now->format("i");
+
+?>
+
+    <!-- Ajoutez 1 mois à la date courante. -->
+    <hr>
+    <h2>Un mois plus tard</h2>
+
+<?php
+
+    $nextmonth = new DateTime('+1 month', new DateTimeZone('Europe/Paris'));
+
+    echo $nextmonth->format('d-m-Y');
+
+?>
+
+    <!-- Que s'est-il passé le 1000200000 ? -->
+    <hr>
+    <h2>1000200000</h2>
+
+<?php
+    
+    echo date('d-m-Y',1000200000);
+
+?>
+<hr>
+<h1>Les formulaires et variables serveur</h1>
+
+<a href="jarditou/contact.html">Page Formulaire Jarditou</a>
 
 </body>
 </html>
