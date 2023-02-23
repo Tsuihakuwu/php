@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"> 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="jarditou/assets/css/styles.css">
+    <link rel="icon" href="assets/img/file_type_php_icon_130266.png">
+    
     <title>Exercices PHP</title>
 </head>
-<body>
+<body class="back">
 
 <!-- Exercices
 
@@ -497,6 +502,91 @@ echo $retour;
 <h1>Les formulaires et variables serveur</h1>
 
 <a href="jarditou/contact.html">Page Formulaire Jarditou</a>
+
+
+<hr>
+
+<h1>La manipulation de fichiers</h1>
+
+<h2>Lecture d'un fichier</h2>
+<!--
+Téléchargez ce fichier, qui contient une liste de sites indispensables à la compréhension du monde moderne.
+
+Écrire un programme qui lit ce fichier et qui construit une page web contenant une liste de liens hypertextes.
+
+    Utilisez la fonction file() qui permet de lire directement un fichier et renvoie son contenu sous forme de tableau. -->
+
+
+<?php
+
+$fp = fopen("assets/file/liens.txt", "r");
+
+while (!feof($fp))
+{
+     $ligne = fgets($fp, 4096);
+     echo '<a href="'.$ligne.'">'.$ligne.'</a><br>';
+}
+
+fclose($fp);
+
+?>
+
+<hr>
+<h2>Récupération d'un fichier distant</h2>
+
+<!-- Un site partenaire mets à votre disposition une liste des nouveaux utilisateurs inscrits.
+
+Cette liste est disponible à cette adresse : http://bienvu.net/misc/customers.csv.
+
+Il s'agit d'un fichier CSV où chaque ligne représente un nouvel utilisateur. Les différents champs sont Surname, Firstname, Email, Phone, City, State, ils sont séparés par une virgule ,.
+
+    Utilisez la fonction file() pour récupérer le contenu de ce fichier.
+
+    Découpez chaque ligne en utilisant une des fonctions suivantes: explode() ou preg_split()
+
+    Affichez le résultat dans un tableau HTML (avec Bootstrap si possible) en prenant bien soin de nommer les colonnes du tableau. -->
+
+<?php
+
+$customers = file("assets/file/customers.csv");
+
+$max_idx = new SplFileObject('assets/file/customers.csv', 'r');
+$max_idx->seek(PHP_INT_MAX);
+$first_entry=true;
+
+?>
+
+<table class='table table-dark d-flex justify-content-center'>
+
+<?php
+for($i=0;$i<$max_idx->key();$i++){
+    if($first_entry==true){
+        $detail = explode(',',$customers[$i]);
+        echo '<tr><th><b>'.ucfirst($detail[0]).'</th><th>'.ucfirst($detail[1]).'</th><th>'.ucfirst($detail[2]).'</th><th>'.ucfirst($detail[3]).'</th><th>'.ucfirst($detail[4]).'</b></th></tr>';
+        $first_entry=false;
+    }
+    elseif($first_entry==false){
+        $detail = explode(',',$customers[$i]);
+        echo '<tr><td>'.$detail[0].'</td><td>'.$detail[1].'</td><td>'.$detail[2].'</td><td>'.$detail[3].'</td><td>'.$detail[4].'</td></tr>';
+    }
+}
+
+?>
+
+</table>
+
+<hr>
+
+<h1>Refonte Jarditou</h1>
+
+<a href='jarditou/index.php'>Jarditou PHP<a>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+            crossorigin="anonymous"></script>
 
 </body>
 </html>
